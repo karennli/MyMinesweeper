@@ -6,10 +6,9 @@ function onClick(ev) {
   if (ev.target.value === "mine") {
   }
   //if you click a number
-  else {
+  else if (ev.target.value.type === "Number") {
+    //if it's the first click
     //if you've completed board
-    if (0) {
-    }
   }
 }
 
@@ -39,6 +38,3 @@ function mineLocations() {
   }
   return mines;
 }
-
-console.log(mineLocations());
-//10x10 board 10 mines, 1/10
