@@ -34,6 +34,34 @@ function generateBoard() {
 
   //populate with nums
   for (let i of board) {
+    //i = [0, {obj keys 0-9}]
+    const row = i[0];
+    const rowValue = { ...i[1] };
+    const columns = Object.keys(i[1]); //0-9
+
+    for (let j of columns) {
+      j = j * 1; //convert to int
+      let counter = 0;
+      const search = [
+        [row, j - 1],
+        [row, j + 1],
+        [row - 1, j],
+        [row - 1, j - 1],
+        [row - 1, j + 1],
+        [row + 1, j],
+        [row + 1, j - 1],
+        [row + 1, j + 1],
+      ];
+      //if mines array includes any of search, add to counter
+      search.map((el) => {
+        if (mines.find((mine) => mine[0] === el[0] && mine[1] === el[1])) {
+          counter++;
+        }
+      });
+      //set board at i,j to counter if its not a mine
+      rowValue[j] = rowValue[j] !== "mine" ? counter : "mine";
+      board.set(row, rowValue);
+    }
   }
 
   return board;
@@ -54,3 +82,5 @@ function mineLocations() {
   }
   return mines;
 }
+
+console.log(generateBoard());
