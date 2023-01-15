@@ -1,26 +1,42 @@
-let d = new Date();
-//document.body.innerHTML = "<h1>Today's date is " + d + "</h1>";
-
 function onClick(ev) {
+  //if its your first click
   //if you click a mine
-  if (ev.target.value === "mine") {
-  }
   //if you click a number
-  else if (ev.target.value.type === "Number") {
-    //if it's the first click
-    //if you've completed board
-  }
+  //if you've completed board
 }
 
 function generateBoard() {
-  const board = [];
+  const board = new Map();
   //empty matrix
   for (var i = 0; i < 10; i++) {
-    board[i] = new Array(10);
+    let obj = {
+      0: null,
+      1: null,
+      2: null,
+      3: null,
+      4: null,
+      5: null,
+      6: null,
+      7: null,
+      8: null,
+      9: null,
+    };
+    board.set(i, { ...obj });
+  }
+  //populate with mines
+  const mines = mineLocations();
+  for (let i of mines) {
+    const firstIndex = i[0];
+    const secondIndex = i[1];
+    let value = board.get(firstIndex);
+    board.set(firstIndex, { ...value, [secondIndex]: "mine" });
   }
 
-  //populate with mines
   //populate with nums
+  for (let i of board) {
+  }
+
+  return board;
 }
 
 //generate 10 random mine locations
