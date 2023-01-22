@@ -1,6 +1,14 @@
 import "./App.css";
+import React, { useEffect, useState } from "react";
+import generateBoard from "./generateBoard";
 
 function App() {
+  const [board, setBoard] = useState([]);
+
+  useEffect(() => {
+    setBoard = generateBoard();
+  }, []);
+
   function onClick(ev) {
     //if its your first click
     //if you click a mine
