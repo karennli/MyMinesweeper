@@ -1,6 +1,5 @@
-
 function generateBoard() {
-  const board = new Map();
+  const board = {};
   //empty matrix
   for (var i = 0; i < 10; i++) {
     let obj = {
@@ -15,24 +14,22 @@ function generateBoard() {
       8: null,
       9: null,
     };
-    board.set(i, { ...obj });
+    board[i] = { ...obj };
   }
   //populate with mines
   const mines = mineLocations();
   for (let i of mines) {
     const firstIndex = i[0];
     const secondIndex = i[1];
-    let value = board.get(firstIndex);
-    board.set(firstIndex, { ...value, [secondIndex]: "mine" });
+    let value = board[firstIndex];
+    board[firstIndex] = { ...value, [secondIndex]: "mine" };
   }
 
   //populate with nums
-  for (let i of board) {
-    //i = [0, {obj keys 0-9}]
-    const row = i[0];
-    const rowValue = { ...i[1] };
-    const columns = Object.keys(i[1]); //0-9
-
+  for (let i of Object.keys(board)) {
+    const row = i * 1;
+    const rowValue = board[i];
+    const columns = Object.keys(rowValue); //0-9
     for (let j of columns) {
       j = j * 1; //convert to int
       let counter = 0;
@@ -54,7 +51,7 @@ function generateBoard() {
       });
       //set board at i,j to counter if its not a mine
       rowValue[j] = rowValue[j] !== "mine" ? counter : "mine";
-      board.set(row, rowValue);
+      board[row] = { ...rowValue };
     }
   }
 
@@ -77,4 +74,4 @@ function mineLocations() {
   return mines;
 }
 
-export default generateBoard; 
+export default generateBoard;

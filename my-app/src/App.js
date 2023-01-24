@@ -4,9 +4,10 @@ import generateBoard from "./generateBoard";
 
 function App() {
   const [board, setBoard] = useState([]);
+  const cr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   useEffect(() => {
-    setBoard = generateBoard();
+    setBoard(generateBoard());
   }, []);
 
   function onClick(ev) {
@@ -19,6 +20,13 @@ function App() {
   return (
     <div className="App">
       <div>hello world!</div>
+      {board
+        ? cr.map((r) => {
+            return cr.map((c) => {
+              return <button>{JSON.stringify(board[r][c])}</button>;
+            });
+          })
+        : ""}
     </div>
   );
 }
