@@ -22,9 +22,17 @@ function App() {
       <div>hello world!</div>
       {board
         ? cr.map((r) => {
-            return cr.map((c) => {
-              return <button>{JSON.stringify(board[r][c])}</button>;
-            });
+            return (
+              <div>
+                {cr.map((c) => {
+                  return board[c] ? (
+                    <button>{JSON.stringify(board[c][r])}</button>
+                  ) : (
+                    ""
+                  );
+                })}
+              </div>
+            );
           })
         : ""}
     </div>
