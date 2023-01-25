@@ -4,17 +4,14 @@ import generateBoard from "./generateBoard";
 
 function App() {
   const [board, setBoard] = useState([]);
-  const cr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const cr = Object.keys(board);
 
   useEffect(() => {
-    setBoard(generateBoard());
+    setBoard(generateBoard(15));
   }, []);
 
   function onClick(ev) {
-    //if its your first click
-    //if you click a mine
-    //if you click a number
-    //if you've completed board
+    console.log(ev.target.value);
   }
 
   return (
@@ -26,7 +23,9 @@ function App() {
               <div>
                 {cr.map((c) => {
                   return board[c] ? (
-                    <button>{JSON.stringify(board[c][r])}</button>
+                    <button onClick={onClick} value={board[c][r]}>
+                      ' '
+                    </button>
                   ) : (
                     ""
                   );
